@@ -7,7 +7,7 @@ var expect = require('expect.js');
 var randomstring = require('random-string');
 
 var WrkrMongodb = require('../lib/wrkr_mongodb');
-var Wrkr = require('../lib/wrkr').Wrkr;
+var Wrkr = require('../lib/wrkr');
 
 
 // Globals

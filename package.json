@@ -2,7 +2,7 @@
   "name": "wrkr",
   "version": "0.0.0",
   "description": "wrkr - distributed worker orchestrator",
-  "main": "index.js",
+  "main": "lib.wrkr.js",
   "scripts": {
     "test": "mocha",
     "tdd": "mocha -w"
