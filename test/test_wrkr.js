@@ -46,11 +46,11 @@ describe('basic operations', function () {
   }
 
 
-  it('should subscribe the testEvent to the testQueue', function (done) {
+  it('subscribe testEvent to our testQueue', function (done) {
     wrkr.subscribe(testQueueName, testEventName, emitEvent, done);
   });
 
-  it('should send our event', function (done) {
+  it('send our event', function (done) {
     // Sent event and wait
     var ourEvent = {
       name: testEventName,
@@ -59,13 +59,14 @@ describe('basic operations', function () {
     wrkr.emit(ourEvent, done);
   });
 
-  it('should start a listener to receive our events from the subscribed queue(s)', function (done) {
+  it('start a listener to receive our events from the subscribed queue(s)', function (done) {
     wrkr.listen(done);
   });
 
-  it('should receive our event after we send it', function (done) {
+  it('receive our event', function (done) {
     ourEmitter.on(testEventName, function (event) {
       expect(event.id).not.to.be(undefined);
+      expect(event.created).not.to.be(undefined);
       expect(event.eventName).to.be(testEventName);
       expect(event.queue).to.be(testQueueName);
       expect(event.tid).to.be(testTid);
