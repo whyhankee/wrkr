@@ -96,6 +96,11 @@ or
 
 ## TODO:
 
-* wrkr should be EventEmitter based for warnings and errors
-* Seperate MongoDB store to it's own package
-* Make MemoryStore for testing (or in-app queues)
+* Wrkr should be EventEmitter based for logging(info, warning, error)
+* Make MemoryStore
+  * for testing (or in-app queues)
+* Check logic-seperation between Wrkr and the Store
+  * reason: seperate MongoDB store to it's own package
+* Think about archiving processed queue-items
+  * reason: the queues tables is index-heavy for efficiency
+  * after 7? days, move to other tables (or databases?)
