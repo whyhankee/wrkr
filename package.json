@@ -1,8 +1,8 @@
 {
   "name": "wrkr",
-  "version": "0.0.0",
-  "description": "wrkr - distributed worker orchestrator",
-  "main": "lib.wrkr.js",
+  "version": "0.0.1",
+  "description": "wrkr - Simple EventSourcing Worker",
+  "main": "index.js",
   "scripts": {
     "test": "mocha",
     "tdd": "mocha -w"
@@ -11,7 +11,12 @@
     "wrkr",
     "worker"
   ],
-  "dependencies": {
+  "homepage": "https://github.com/Lerint/wrkr",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Lerint/wrkr.git"
+  },
+    "dependencies": {
     "debug": "2.2.0",
     "mongoose": "4.3.5",
     "neo-async": "1.7.2"
@@ -21,6 +26,6 @@
     "mocha": "2.3.4",
     "random-string": "0.1.2"
   },
-  "author": "Paul Wijhenke <paul@lerint.nl>",
+  "author": "Paul Wijhenke <paul@paulsplace.nl>",
   "license": "MIT"
 }
