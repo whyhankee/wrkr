@@ -43,7 +43,7 @@ describe('basic operations', function () {
   // Test function to emit received messages (back to our tests)
   function emitEvent(event, done) {
     debug('emitEvent', event);
-    ourEmitter.emit(event.eventName, event);
+    ourEmitter.emit(event.name, event);
     return done(null);
   }
 
@@ -69,7 +69,7 @@ describe('basic operations', function () {
     ourEmitter.on(testEventName, function (event) {
       expect(event.id).not.to.be(undefined);
       expect(event.created).not.to.be(undefined);
-      expect(event.eventName).to.be(testEventName);
+      expect(event.name).to.be(testEventName);
       expect(event.queue).to.be(testQueueName);
       expect(event.tid).to.be(testTid);
 
