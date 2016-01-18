@@ -39,6 +39,8 @@ after( function (done) {
 // Setup listener
 //
 describe('basic operations', function () {
+
+  // Test function to emit received messages (back to our tests)
   function emitEvent(event, done) {
     debug('emitEvent', event);
     ourEmitter.emit(event.eventName, event);
