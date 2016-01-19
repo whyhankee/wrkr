@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git@github.com:Lerint/wrkr.git"
   },
-    "dependencies": {
+  "dependencies": {
     "debug": "2.2.0",
     "mongoose": "4.3.5",
     "neo-async": "1.7.2"
