@@ -58,7 +58,7 @@ describe('basic operations', function () {
       name: testEventName,
       tid: testTid
     };
-    wrkr.emit(ourEvent, done);
+    wrkr.publish(ourEvent, done);
   });
 
   it('start a listener to receive our events from the subscribed queue(s)', function (done) {
