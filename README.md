@@ -50,6 +50,8 @@
 
   *Some service/application might want to followUp on that event, in this case, our Customer Satisfaction Team*
 
+  It subscribes a queue to the event and passes the function that will handle the event. The subscription will be registered in the database and the queue will start to receive the events. The handler will be called when events arrive. Acknowledge the event as handled when you want, before or after processing.
+
     ourWorkQueue = 'ourApp.CustomerSatisfactionTeam'
     wrkr.subScribe(ourWorkQueue, 'ourapp.user.added', onUserAdded, function (err) {
       if (err) throw err;
@@ -71,7 +73,7 @@
         tid: event.tid
       });
 
-      return ack();     // here we ack() the event as processed when all work is done.
+      return ack();
     };
 
 ####  The basic tests contain some more code, still working on the rest
