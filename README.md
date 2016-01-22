@@ -108,5 +108,6 @@ or
 * Tests - A shared testing framework/solution must be devised to have a standard interface tests for transport or storage engines.
 
 * Think about archiving processed queue-items
-  * reason: the queues tables is index-heavy for efficiency
-  * after 7? days, move to other tables (or databases?)
+  * delete immediately, or, maybe: reuse (after xx time)?
+  * cleanup timer
+  * Storage: delete or move to another table (or db)

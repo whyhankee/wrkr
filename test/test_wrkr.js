@@ -18,7 +18,7 @@ var testTid       = 'tid_'+randomstring();
 
 
 // We use this emitter to deliver our events back to the tests
-var ourEmitter = new EventEmitter();
+var testEmitter = new EventEmitter();
 
 // Initialize our workerInterface
 var wrkr = new Wrkr({
@@ -40,19 +40,19 @@ after( function (done) {
 //
 describe('basic operations', function () {
 
-  // Test function to emit received messages (back to our tests)
+  // Test function to emit received Wrkr messages (back to our tests)
   function emitEvent(event, done) {
     debug('emitEvent', event);
-    ourEmitter.emit(event.name, event);
+    testEmitter.emit(event.name, event);
     return done(null);
   }
 
-
-  it('subscribe testEvent to our testQueue', function (done) {
+  // Start tests
+  it('subscribes testEvent to our testQueue', function (done) {
     wrkr.subscribe(testQueueName, testEventName, emitEvent, done);
   });
 
-  it('send our event', function (done) {
+  it('sends our event', function (done) {
     // Sent event and wait
     var ourEvent = {
       name: testEventName,
@@ -61,12 +61,12 @@ describe('basic operations', function () {
     wrkr.publish(ourEvent, done);
   });
 
-  it('start a listener to receive our events from the subscribed queue(s)', function (done) {
+  it('starts a listener to receive our events from the subscribed queue(s)', function (done) {
     wrkr.listen(done);
   });
 
-  it('receive our event', function (done) {
-    ourEmitter.on(testEventName, function (event) {
+  it('receives our event', function (done) {
+    testEmitter.on(testEventName, function (event) {
       expect(event.id).not.to.be(undefined);
       expect(event.created).not.to.be(undefined);
       expect(event.name).to.be(testEventName);
