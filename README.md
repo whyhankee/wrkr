@@ -91,17 +91,17 @@ or
 
 ## TODO:
 
-* Make MemoryStore
-  * for testing (or in-app queues)
+* Implement: When '7 days' syntax
+
+* Move Store tests to it's own package
 
 * Move MongoDB store to its own package
 
+* Make MemoryStore
+  * for testing (or in-app queues)
+
 * MongoDB store - Replace mongoose by regular mongo driver
   Mongoose was easy to setup, it's overkill though
-
-* Implement other transport (or Storage? - decide) like RabbitMQ
-
-* Move Store tests to it's own package
 
 * Tests - A shared testing framework/solution must be devised to have a standard interface tests for transport or storage engines.
 
@@ -109,3 +109,5 @@ or
   * delete immediately, or, maybe: reuse (after xx time)?
   * cleanup timer
   * Storage: delete or move to another table (or db)
+
+* Implement other transport (or Storage? - decide) like RabbitMQ
