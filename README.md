@@ -32,7 +32,7 @@
 
   *We make a worker and connect to 'some storage', in this case MongoDB*
 
-   	var wrkr = new Wrkr({
+    var wrkr = new Wrkr({
   		store: new WrkrMongodb()
   	});
   	wrkr.start(function (err) {
@@ -90,8 +90,6 @@ or
 
 
 ## TODO:
-
-* Change interface to better differentiate between subscribing events to queues and receiving / processing events from queues
 
 * Make MemoryStore
   * for testing (or in-app queues)

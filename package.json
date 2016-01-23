@@ -1,6 +1,6 @@
 {
   "name": "wrkr",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "wrkr - Simple pubsub-postprocessing-scheduler",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "wrkr",
     "worker",
     "scheduler",
-    "post-processing"
+    "post",
+    "processing"
   ],
   "homepage": "https://github.com/Lerint/wrkr",
   "repository": {
