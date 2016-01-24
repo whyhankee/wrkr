@@ -14,10 +14,10 @@
     "post",
     "processing"
   ],
-  "homepage": "https://github.com/Lerint/wrkr",
+  "homepage": "https://github.com/whyhankee/wrkr",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Lerint/wrkr.git"
+    "url": "git@github.com:whyhankee/wrkr.git"
   },
   "dependencies": {
     "debug": "2.2.0",
