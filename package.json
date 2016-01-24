@@ -1,6 +1,6 @@
 {
   "name": "wrkr",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "wrkr - Simple pubsub-postprocessing-scheduler",
   "main": "index.js",
   "scripts": {
