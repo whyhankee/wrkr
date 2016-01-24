@@ -55,13 +55,14 @@
     });
 
     function onUserAdded(event, ack) {
+      // AddUserMetrics({userId: event.tid});
       // sendWarmWelcomeEmail({userId: event.tid});
 
       // followUp in a week
       wrkr.publish({
         name: ourapp.cst.user.welcome.followup,
         tid: event.tid,
-        when: '7 days'
+        when: new Date(Date.now()+human-interval('7 days'))
       });
 
       // Let others know we did the followUp
@@ -88,10 +89,6 @@ or
 
 ## TODO:
 
-* Implement: When '7 days' (human-interval) syntax
-
-* Fix stop() closing database when a qitem is dispatched, cannot update afterwards
-
 * Move backend tests to its own package so we have a standard interface tests for the backend engines.
 
 * Move MongoDB backend to its own package
@@ -106,6 +103,3 @@ or
   * delete immediately, or, maybe: reuse (after xx time)?
   * cleanup timer
   * Storage: delete or move to another table (or db)
-
-* Implement other backends like RabbitMQ / MQTT
-  * Find solution for scheduled events
