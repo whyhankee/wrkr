@@ -1,4 +1,4 @@
-## Worker - some experimenting with NodeJS postprocessing, pub-sub messaging and scheduler.
+## Worker - Experimenting with NodeJS pub-sub, post-processing and scheduling.
 
 ### What?
 
@@ -8,24 +8,21 @@
 
   * This way, by reacting to events you create loose coupling, little components that are easy to maintain, deploy and removed.
 
-  * Create a general use API (Wrkr) that can be used with a storage-plugin that works best for your  environment, each will have their benefits.
+  * Create a general use API (Wrkr) that can be used with a backend-plugin that works best for your  environment, each will have their benefits.
 
   * It's not build for performance, it's for flexibility.
 
-  Notes:
+### Current state
 
-    * Wrkr currently only has one storage: MongoDB (and it could really be improved!).
+  * Disclaimer: This is *very alpha* everything could happen.
 
-    * It would be easy to implement storage-plugins for other databases.
+  * Wrkr currently only has one backend: MongoDB (and it could really be improved!).
 
-    * For transports like RabbitMQ, Redis, etc I need to think about the scheduler part.
+  * It should be easy to implement backend-plugins for other databases.
 
-    * For further notes see the TODO list below
+  * I would also like to implement other messaging solution (e.g. RabbitMQ / MQTT) however that would require a solution for the scheduler part.
 
-
-### Disclaimer
-
-  This is *very alpha* everything could happen.
+  * For further notes see the TODO list below
 
 
 ### General idea in code
@@ -33,7 +30,7 @@
   *We make a worker and connect to 'some storage', in this case MongoDB*
 
     var wrkr = new Wrkr({
-  		store: new WrkrMongodb()
+  		backend: new WrkrMongodb()
   	});
   	wrkr.start(function (err) {
   		if (err) throw err;
@@ -91,23 +88,24 @@ or
 
 ## TODO:
 
-* Implement: When '7 days' syntax
+* Implement: When '7 days' (human-interval) syntax
 
-* Move Store tests to it's own package
+* Fix stop() closing database when a qitem is dispatched, cannot update afterwards
 
-* Move MongoDB store to its own package
+* Move backend tests to its own package so we have a standard interface tests for the backend engines.
 
-* Make MemoryStore
+* Move MongoDB backend to its own package
+
+* Make MemoryBackend
   * for testing (or in-app queues)
 
-* MongoDB store - Replace mongoose by regular mongo driver
+* MongoDB backend - Replace mongoose by regular mongo driver
   Mongoose was easy to setup, it's overkill though
-
-* Tests - A shared testing framework/solution must be devised to have a standard interface tests for transport or storage engines.
 
 * Think about archiving processed queue-items
   * delete immediately, or, maybe: reuse (after xx time)?
   * cleanup timer
   * Storage: delete or move to another table (or db)
 
-* Implement other transport (or Storage? - decide) like RabbitMQ
+* Implement other backends like RabbitMQ / MQTT
+  * Find solution for scheduled events
