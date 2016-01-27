@@ -14,7 +14,7 @@
 
 ### Current state
 
-  * Disclaimer: This is *very alpha* everything could happen.
+  * **Disclaimer: This is *very alpha* everything could happen**.
 
   * Wrkr currently only has one backend: MongoDB (and it could really be improved!).
 
@@ -84,7 +84,7 @@ just run
 
 or
 
-    DEBUG=wrkr:* npm run tdd
+    DEBUG=wrkr* npm run tdd
 
 
 ## TODO:
