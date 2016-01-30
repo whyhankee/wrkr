@@ -76,13 +76,13 @@
 
 ####  The basic tests contain some more code, still working on the rest
 
-## Testing and debugging
+## Testing, developing and debugging
 
-just run
+For tests, just run:
 
     npm run tdd
 
-or
+or, for development, run:
 
     DEBUG=wrkr* npm run tdd
 
