@@ -73,9 +73,14 @@ function testBasic() {
     // Sent event and wait
     var ourEvent = {
       name: testEventName,
-      tid: testTid
+      tid: testTid,
+      onceEvery: 10
     };
-    wrkr.publish(ourEvent, done);
+    // twice, so we can see that onceEvery works (not really tested / proved)
+    wrkr.publish(ourEvent, err => {
+      if (err) return done(err);
+      wrkr.publish(ourEvent, done);
+    });
   });
 
   it('starts a listener to receive our events from the subscribed queue(s)', function (done) {
