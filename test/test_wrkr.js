@@ -34,6 +34,7 @@ var wrkr = new Wrkr({
 
 // Start testing
 describe('backend - start', testStart);
+describe('subscriptions', testSubscriptions);
 describe('basic operations', testBasic);
 describe('backend - stop', testStop);
 
@@ -50,6 +51,57 @@ function testStop() {
     wrkr.stop(done);
   });
 }
+
+
+function testSubscriptions() {
+  var eventName = 'event_'+randomstring();
+  var queueName = 'queue_'+randomstring();
+
+  function fakeHandler() {}
+
+  it('event should not have any subscriptions', function (done) {
+    wrkr.subscriptions(eventName, function (err, subscriptions) {
+      expect(err).to.be(null);
+      expect(subscriptions).to.be.an(Array);
+      expect(subscriptions.length).to.be(0);
+      return done();
+    });
+  });
+
+  it('subscribes the testqueue to the event', function (done) {
+    wrkr.subscribe(queueName, eventName, fakeHandler, function (err) {
+      expect(err).to.be(null);
+      expect(wrkr.eventHandlers[eventName]).to.be(fakeHandler);
+      return done();
+    });
+  });
+
+  it('event should have a subscribed queue', function (done) {
+    wrkr.subscriptions(eventName, function (err, subscriptions) {
+      expect(err).to.be(null);
+      expect(subscriptions).to.be.an(Array);
+      expect(subscriptions.length).to.be(1);
+      expect(subscriptions[0]).to.be(queueName);
+      return done();
+    });
+  });
+
+  it('unsubscribes the testqueue to the event', function (done) {
+    wrkr.unsubscribe(queueName, eventName, done);
+  });
+
+  it('event should not have a subscribed queue anymore', function (done) {
+    wrkr.subscriptions(eventName, function (err, subscriptions) {
+      expect(err).to.be(null);
+      expect(subscriptions).to.be.an(Array);
+      expect(subscriptions.length).to.be(0);
+
+      expect(wrkr.eventHandlers[eventName]).to.be(undefined);
+      return done();
+    });
+  });
+}
+
 
 function testBasic() {
   var testEmitter = new EventEmitter();
