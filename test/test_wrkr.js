@@ -6,9 +6,6 @@ var debug = require('debug')('wrkr:tests');
 var expect = require('expect.js');
 var randomstring = require('random-string');
 
-// Overwrite process.env for the test database name
-process.env.NODE_ENV = 'unittest';
-
 var WrkrMongodb = require('../lib/wrkr_mongodb');
 var Wrkr = require('../lib/wrkr');
 
@@ -18,7 +15,7 @@ var wrkr = new Wrkr({
   backend: new WrkrMongodb({
     host:              'localhost',
     port:              27017,
-    name:              'wrkr' + (process.env.NODE_ENV ? '_'+process.env.NODE_ENV : ''),
+    name:              'wrkr_unittest',
     user:              '',
     pswd:              '',
     dbOpt:             {w: 1},  // Write concern
@@ -121,21 +118,35 @@ function testBasic() {
     wrkr.subscribe(testQueueName, testEventName, emitEvent, done);
   });
 
-  it('sends our event', function (done) {
-    // Sent event and wait
-    var ourEvent = {
-      name: testEventName,
-      tid: testTid,
-      onceEvery: 10
-    };
-    // twice, so we can see that onceEvery works (not really tested / proved)
-    wrkr.publish(ourEvent, err => {
-      if (err) return done(err);
-      wrkr.publish(ourEvent, done);
+  it('should *not* get any event (we did not send one)', function (done) {
+    wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
+      expect(err).to.be(null);
+      expect(qitems).to.be.an(Array);
+      expect(qitems.length).to.be(0);
+      return done();
     });
   });
 
-  it('starts a listener to receive our events from the subscribed queue(s)', function (done) {
+  it('send our event', function (done) {
+    var ourEvent = {
+      name: testEventName,
+      tid: testTid,
+    };
+    wrkr.publish(ourEvent, done);
+  });
+
+  it('get our published event', function (done) {
+    wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
+      expect(err).to.be(null);
+      expect(qitems).to.be.an(Array);
+      expect(qitems.length).to.be(1);
+      expect(qitems[0].name).to.be(testEventName);
+      expect(qitems[0].queue).to.be(testQueueName);
+      return done();
+    });
+  });
+
+  it('start a listener to receive our events from the subscribed queue(s)', function (done) {
     wrkr.listen(done);
   });
 
