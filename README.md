@@ -89,6 +89,11 @@ or, for development, run:
 
 ## TODO:
 
+* Think about archiving processed queue-items
+  * delete immediately, or, maybe: reuse (after xx time)?
+  * cleanup timer
+  * Storage: delete or move to another table (or db)
+
 * Move backend tests to its own package so we have a standard interface tests for the backend engines.
 
 * Move MongoDB backend to its own package
@@ -98,8 +103,3 @@ or, for development, run:
 
 * MongoDB backend - Replace mongoose by regular mongo driver
   Mongoose was easy to setup, it's overkill though
-
-* Think about archiving processed queue-items
-  * delete immediately, or, maybe: reuse (after xx time)?
-  * cleanup timer
-  * Storage: delete or move to another table (or db)
