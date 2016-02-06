@@ -21,11 +21,12 @@ var wrkr = new Wrkr({
     dbOpt:             {w: 1},  // Write concern
 
     pollInterval:      50,      // default: 500, regular polling time (waiting for new items)
-    pollIntervalBusy:  5,       // default: 20 next-item-polling-interval after processing an item
+    pollIntervalBusy:  5,       // default: 5 next-item-polling-interval after processing an item
 
     errorRetryTime:    500,     // default: 5000, on error retry timer
                                 //    (not so happy with auto-retrying though)
-  })
+  }),
+  archiveMethod: 'archive'
 });
 
 
@@ -158,6 +159,15 @@ function testBasic() {
       expect(event.queue).to.be(testQueueName);
       expect(event.tid).to.be(testTid);
       return done(null);
+    });
+  });
+
+  it('should *not* get any event (already processed)', function (done) {
+    wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
+      expect(err).to.be(null);
+      expect(qitems).to.be.an(Array);
+      expect(qitems.length).to.be(0);
+      return done();
     });
   });
 }
