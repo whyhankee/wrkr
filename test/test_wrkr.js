@@ -33,8 +33,8 @@ var wrkr = new Wrkr({
 describe('backend - start', testStart);
 describe('subscriptions', testSubscriptions);
 describe('basic operations', testBasic);
+describe('- OnceEvery', testOnceEvery);
 describe('backend - stop', testStop);
-
 
 
 function testStart() {
@@ -170,22 +170,11 @@ function testBasic() {
     wrkr.publish(ourEvent, done);
   });
 
-  it('getQueueItems = 1', function (done) {
-    wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
-      expect(err).to.be(null);
-      expect(qitems).to.be.an(Array);
-      expect(qitems.length).to.be(1);
-      expect(qitems[0].name).to.be(testEventName);
-      expect(qitems[0].queue).to.be(testQueueName);
-      return done();
-    });
-  });
-
   it('start a listener to receive our events from the subscribed queue(s)', function (done) {
-    wrkr.listen(done);
-  });
+    wrkr.listen(function (err) {
+      if (err) return done(err);
+    });
 
-  it('receives our event', function (done) {
     testEmitter.on(testEventName, function (event) {
       expect(event.id).not.to.be(undefined);
       expect(event.created).not.to.be.within(new Date(), new Date(Date.now() - 1000));
@@ -196,6 +185,9 @@ function testBasic() {
     });
   });
 
+  // it('receives our event', function (done) {
+  // });
+  //
   it('getQueueItems = 0', function (done) {
     wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
       expect(err).to.be(null);
@@ -204,4 +196,47 @@ function testBasic() {
       return done();
     });
   });
+}
+
+
+function testOnceEvery() {
+  var testTid = randomstring();
+  var testEventName = 'event_'+testTid;
+  var testQueueName = 'queue_'+testTid;
+  var onceEverySecs = 30;
+
+  // Start tests
+  it('subscribes testEvent to our testQueue', function (done) {
+    wrkr.subscribe(testQueueName, testEventName, done);
+  });
+
+  // Publish two messages
+  it('publish two events with .onceEvery property', function (done) {
+    var ourEvent = {
+      name: testEventName,
+      onceEvery: onceEverySecs * 1000,
+      tid: testTid
+    };
+    wrkr.publish(ourEvent, function (err) {
+      if (err) return done(err);
+      wrkr.publish(ourEvent, done);
+    });
+  });
+
+  it('getQueueItems = 1 - should only be 1 queued with a proper .when property', function (done) {
+    wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
+      expect(err).to.be(null);
+      expect(qitems).to.be.an(Array);
+      expect(qitems.length).to.be(1);
+      expect(qitems[0].name).to.be(testEventName);
+      expect(qitems[0].queue).to.be(testQueueName);
+
+      let whenStart = new Date(Date.now() + (onceEverySecs-5)*1000);
+      let whenEnd = new Date(Date.now() + onceEverySecs*1000);
+      expect(qitems[0].when).to.be.within(whenStart, whenEnd);
+
+      return done();
+    });
+  });
+
 }
