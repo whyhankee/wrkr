@@ -89,9 +89,10 @@ or, for development, run:
 
 ## TODO:
 
-* Move backend tests to its own package so we have a standard interface tests for the backend engines.
+* Stabilize API, tests, functionality
 
 * Move MongoDB backend to its own package
+  * includes a separate package for the backend tests
 
 * Make MemoryBackend
   * for testing (or in-app queues)
