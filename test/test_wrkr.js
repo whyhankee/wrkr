@@ -25,8 +25,7 @@ var wrkr = new Wrkr({
 
     errorRetryTime:    500,     // default: 5000, on error retry timer
                                 //    (not so happy with auto-retrying though)
-  }),
-  archiveMethod: 'archive'
+  })
 });
 
 
@@ -119,7 +118,7 @@ function testBasic() {
     wrkr.subscribe(testQueueName, testEventName, emitEvent, done);
   });
 
-  it('should *not* get any event (we did not send one)', function (done) {
+  it('should *not* get any event (we did not send one yet)', function (done) {
     wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
       expect(err).to.be(null);
       expect(qitems).to.be.an(Array);
