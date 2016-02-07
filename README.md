@@ -90,6 +90,7 @@ or, for development, run:
 ## TODO:
 
 * Stabilize API, tests, functionality
+  * subscriptions based on patterns (e.g. regular expressions)
 
 * Move MongoDB backend to its own package
   * includes a separate package for the backend tests
