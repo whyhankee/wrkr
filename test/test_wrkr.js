@@ -100,6 +100,8 @@ function testSubscriptions() {
 }
 
 
+// TODO: It's Time to split this one up
+//
 function testBasic() {
   var testEmitter = new EventEmitter();
   var testTid = randomstring();
@@ -118,7 +120,7 @@ function testBasic() {
     wrkr.subscribe(testQueueName, testEventName, emitEvent, done);
   });
 
-  it('should *not* get any event (we did not send one yet)', function (done) {
+  it('getQueueItems = 0', function (done) {
     wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
       expect(err).to.be(null);
       expect(qitems).to.be.an(Array);
@@ -127,7 +129,7 @@ function testBasic() {
     });
   });
 
-  it('send our event', function (done) {
+  it('publish our event', function (done) {
     var ourEvent = {
       name: testEventName,
       tid: testTid,
@@ -135,7 +137,40 @@ function testBasic() {
     wrkr.publish(ourEvent, done);
   });
 
-  it('get our published event', function (done) {
+  it('getQueueItems = 1', function (done) {
+    wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
+      expect(err).to.be(null);
+      expect(qitems).to.be.an(Array);
+      expect(qitems.length).to.be(1);
+      expect(qitems[0].name).to.be(testEventName);
+      expect(qitems[0].queue).to.be(testQueueName);
+      return done();
+    });
+  });
+
+
+  it('delete events', function (done) {
+    wrkr.deleteQueueItems({name: testEventName, tid: testTid}, done);
+  });
+
+  it('getQueueItems = 0', function (done) {
+    wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
+      expect(err).to.be(null);
+      expect(qitems).to.be.an(Array);
+      expect(qitems.length).to.be(0);
+      return done();
+    });
+  });
+
+  it('publish our event (again)', function (done) {
+    var ourEvent = {
+      name: testEventName,
+      tid: testTid,
+    };
+    wrkr.publish(ourEvent, done);
+  });
+
+  it('getQueueItems = 1', function (done) {
     wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
       expect(err).to.be(null);
       expect(qitems).to.be.an(Array);
@@ -161,7 +196,7 @@ function testBasic() {
     });
   });
 
-  it('should *not* get any event (already processed)', function (done) {
+  it('getQueueItems = 0', function (done) {
     wrkr.getQueueItems({name: testEventName, tid: testTid}, function (err, qitems) {
       expect(err).to.be(null);
       expect(qitems).to.be.an(Array);
