@@ -7,7 +7,7 @@
   "undef": true,
   "eqeqeq": true,
   "latedef":"nofunc",
-  "maxlen": 99,
+  "maxlen": 89,
   "newcap": true,
   "strict": true
 }
