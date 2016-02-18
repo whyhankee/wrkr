@@ -1,4 +1,4 @@
-'use strict';
+'use strict;';
 var events = require('events');
 var util = require('util');
 
@@ -17,7 +17,7 @@ var debug = require('debug')('wrkr');
   * @this {Wrkr}
   * @param {object} options           options for the worker
   * @param {object} options.backend   backend to use for this worker
-  * @param {object} options.archiveMethod   archive-strategy to use ('delete', 'markDone')
+  * @param {object} options.archiveMethod   archive-strategy ('delete', 'markDone')
   */
 function Wrkr(options) {
   this.backend = options.backend;

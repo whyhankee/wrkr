@@ -1,11 +1,10 @@
 {
   "name": "wrkr",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "wrkr - Simple pubsub-postprocessing-scheduler",
-  "main": "index.js",
+  "main": "wrkr.js",
   "scripts": {
-    "test": "mocha",
-    "tdd": "mocha -w"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "wrkr",
@@ -21,12 +20,9 @@
   },
   "dependencies": {
     "debug": "2.2.0",
-    "mongoose": "4.3.6",
     "neo-async": "1.7.2"
   },
   "devDependencies": {
-    "expect.js": "0.3.1",
-    "mocha": "2.3.4",
     "random-string": "0.1.2"
   },
   "author": "Paul Wijhenke <paul@paulsplace.nl>",
