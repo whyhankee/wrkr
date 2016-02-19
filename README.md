@@ -25,14 +25,18 @@
 
 *We make a worker and connect to 'some storage', in this case MongoDB*
 ```
-var wrkr = new Wrkr({
+var wrkr = require('wrkr');
+
+var wrkr = new wrkr.Wrkr({
 	backend: new WrkrMongodb()
 });
 wrkr.start(function (err) {
 	if (err) throw err;
 });
 ```
+
 *When some work is done, we publish an event about what we did:*
+
 ```
 // some user decided to sign-up for our application
 //   we stored the user in the database
@@ -41,9 +45,11 @@ wrkr.publish({
   tid:  idOfUser
 });
 ```
+
 *Some service/application might want to followUp on that event, in this case, our Customer Satisfaction Team*
 
 It subscribes a queue to the event and passes the function that will handle the event. The subscription will be registered in the database and the queue will start to receive the events. The handler will be called when events arrive. Acknowledge the event as handled when you want, before or after processing.
+
 ```
 ourWorkQueue = 'ourApp.CustomerSatisfactionTeam'
 wrkr.subScribe(ourWorkQueue, 'ourapp.user.added', onUserAdded, function (err) {
@@ -88,6 +94,10 @@ So, with a stable engine (mongodb) you could test this module by running the eng
   * .. and other tests ofc.
 
 ## Changelog
+
+v0.0.9
+
+  * Seperating the tests was a bad idea, reverting this.
 
 v0.0.8
 

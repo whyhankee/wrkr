@@ -1,8 +1,8 @@
 {
   "name": "wrkr",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "wrkr - Simple pubsub-postprocessing-scheduler",
-  "main": "wrkr.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +23,7 @@
     "neo-async": "1.7.2"
   },
   "devDependencies": {
+    "async": "1.5.2",
     "random-string": "0.1.2"
   },
   "author": "Paul Wijhenke <paul@paulsplace.nl>",
