@@ -23,7 +23,6 @@
     "neo-async": "1.7.2"
   },
   "devDependencies": {
-    "async": "1.5.2",
     "random-string": "0.1.2"
   },
   "author": "Paul Wijhenke <paul@paulsplace.nl>",
