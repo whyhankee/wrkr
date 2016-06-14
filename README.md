@@ -97,7 +97,7 @@ So, with a stable engine (mongodb) you could test this module by running the eng
 
 v0.0.9
 
-  * Seperating the tests was a bad idea, reverting this.
+  * Separating the tests was a bad idea, reverting this.
 
 v0.0.8
 
