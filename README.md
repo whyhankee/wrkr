@@ -1,25 +1,10 @@
 ## Worker - Experimenting with NodeJS pub-sub, post-processing and scheduling.
 
-### What?
-
-* Experimenting with a pub-sub system that also schedules events for later (post-) processing by using a regular database.
-
-* The pub-sub system would make it easy for multiple processes to communicate with each other by sending events. Other processes can pickup the events, do what need to do (and let others know by sending an event).
-
-* This way, by reacting to events you create loose coupling, little components that are easy to maintain, deploy and removed.
-
-* Create a general use API (Wrkr) that can be used with a backend-plugin that works best for your  environment, each will have their benefits.
-
-* It's not build for performance, it's for flexibility.
-
 ### Current state
 
-* **Disclaimer: This is *very alpha* everything could happen**.
+* **Disclaimer: In maintenance**.
 
-* Wrkr currently only has one backend: <https://github.com/whyhankee/wrkr-store-mongodb> (and it could really be improved!).
-
-* It should be easy to implement backend-plugins for other databases.
-
+* FollowUp project <https://github.com/whyhankee/dbwrkr>
 
 ### General idea in code
 
