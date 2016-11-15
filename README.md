@@ -80,6 +80,19 @@ So, with a stable engine (mongodb) you could test this module by running the eng
 
 ## Changelog
 
+v0.0.12
+
+  * Fix delete-spec now includes queue (was deleting unprocessed items)
+  * Added debug statements for start() & stop()
+
+v0.0.11
+
+  * getQueueItems - Changed Qitem minimal find spec (fix, take two)
+
+v0.0.10
+
+  * getQueueItems - Changed minimal find spec
+
 v0.0.9
 
   * Separating the tests was a bad idea, reverting this.
