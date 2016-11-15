@@ -80,7 +80,7 @@ So, with a stable engine (mongodb) you could test this module by running the eng
 
 ## Changelog
 
-v0.0.13 (upcoming)
+v0.0.13
 
   * Pass event to emitted error
 
