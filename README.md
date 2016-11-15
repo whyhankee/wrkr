@@ -80,6 +80,10 @@ So, with a stable engine (mongodb) you could test this module by running the eng
 
 ## Changelog
 
+v0.0.13 (upcoming)
+
+  * Pass event to emitted error
+
 v0.0.12
 
   * Fix delete-spec now includes queue (was deleting unprocessed items)
